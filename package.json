@@ -1,0 +1,30 @@
+{
+  "name": "mongotoredis",
+  "version": "1.0.0",
+  "description": "=",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mary62442/MongoToRedis.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mary62442/MongoToRedis/issues"
+  },
+  "homepage": "https://github.com/Mary62442/MongoToRedis#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "cluster": "^0.7.7",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.1"
+  },
+  "engine": {
+    "node": "*",
+    "npm": "*"
+  }
+}
