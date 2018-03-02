@@ -32,10 +32,29 @@ exports.secretData = {
     thirdRoute:'dhaetyhaetgdhbfgbn5674ser',
     fourthRoute:'sdjogfnwo0aq23aojfnapw',
 
-    firstPassword: 'secret',
-    secondPassword : 'hidden',
-    thirdPassword : 'concealed',
-    fourthPassword : 'inaccessible',
-    fifthPassword : 'impenetrable'
+    users: [
+        {
+            name:'DM88',
+            memorableQ:'Favourite season?',
+            memorableA:'autumn',
+            firstPassword: 'secret',
+            secondPassword : 'hidden',
+            thirdPassword : 'concealed',
+            fourthPassword : 'inaccessible'
+            
+        },
+        {
+            name:'Rapunzel',
+            memorableQ:'Favourite season?',
+            memorableA:'summer',
+            firstPassword: 'secret',
+            secondPassword : 'hidden',
+            thirdPassword : 'concealed',
+            fourthPassword : 'inaccessible'
+            
+        }
+    ]
+
+    
 }
 

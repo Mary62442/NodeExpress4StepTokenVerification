@@ -36,29 +36,48 @@ app.get('/', (req, res) => {
 
 app.post('/firststepsecurity', (req,res) => { 
 
-    let firstAuth = req.get('custom-auth-step1');    
+    let firstPassword = req.get('custom-auth-step1');   
+    let username = req.body.username;
+    let memorableA = req.body.memorableA; 
 
-    if (firstAuth === secret.secretData.firstPassword) {
-        let token = jwt.sign(secret.secretData.signInEntityCaptain, secret.secretData.tokenSignInSecretCaptain, {
-            expiresIn: "2 days"
-          });
-          res.json({
-            success: true,
-            message: 'First JWT token created and signed!',
-            token: token,
-            secondRoute: secret.secretData.secondRoute
-          });
+    let user = secret.secretData.users.find( user => user.name === username );
+        if (typeof user === 'undefined') {
+            res.json({success: false, message:'Failure. User not found'}); 
+        };
+    if (memorableA === user.memorableA) {
+        if (firstPassword === user.firstPassword) {
+            let token = jwt.sign(secret.secretData.signInEntityCaptain, secret.secretData.tokenSignInSecretCaptain, {
+                expiresIn: "2 days"
+              });
+              res.json({
+                success: true,
+                message: 'First JWT token created and signed!',
+                username:user.name,
+                token: token,
+                secondRoute: secret.secretData.secondRoute
+              });
+        }
+        else res.json({success: false, message:'Failure. First JWT token not created'}); 
+    }  
+    
+    else {
+        res.json({success: false, message:'Failure. Incorrect memorable answer'});
     }
-    else res.json({success: false, message:'Failure. First JWT token not created'});    
     
 });
 
 
 app.post('/tfrytiruytrrgr56767j98', (req,res) => {
-    let secondAuth = req.get('custom-auth-step2');   
+    let secondPassword = req.get('custom-auth-step2');   
     let token1 = req.body.token1;
+    let username = req.body.username;
 
-    if (secondAuth === secret.secretData.secondPassword) {
+    let user = secret.secretData.users.find( user => user.name === username );
+        if (typeof user === 'undefined') {
+            res.json({success: false, message:'Failure. User not found'}); 
+        };
+
+    if (secondPassword === user.secondPassword) {
         
         if (token1) {
             // verifies secret and checks exp
@@ -66,75 +85,78 @@ app.post('/tfrytiruytrrgr56767j98', (req,res) => {
                 if (err) {
                 return res.json({ success: false, message: 'Failed to authenticate token.' });
                 } 
-                else {
-                    let token2 = jwt.sign(secret.secretData.signInEntityGeneral, secret.secretData.tokenSignInSecretGeneral, {
-                        expiresIn: "2 days"
-                      });
-                      res.json({
-                        success: true,
-                        message: 'Second JWT token created and signed!',
-                        token: token2,
-                        thirdRoute: secret.secretData.thirdRoute
+                
+                let token2 = jwt.sign(secret.secretData.signInEntityGeneral, secret.secretData.tokenSignInSecretGeneral, {
+                    expiresIn: "2 days"
                     });
-                }
-            });
-        
+                res.json({
+                    success: true,
+                    message: 'Second JWT token created and signed!',
+                    token: token2,
+                    username: user.name,
+                    thirdRoute: secret.secretData.thirdRoute
+                });
+                
+            });        
         }
-
     }
-
     else {
         res.json({success: false, message:'Failure. Second JWT token not created'});
     }
-
-    
-
 })
 
 
 app.post('/dhaetyhaetgdhbfgbn5674ser', (req,res) => {
-    let thirdAuth = req.get('custom-auth-step3');   
+    let thirdPassword = req.get('custom-auth-step3');   
     let token2 = req.body.token2;
+    let username = req.body.username;
 
-    if (thirdAuth === secret.secretData.thirdPassword) {
+    let user = secret.secretData.users.find( user => user.name === username );
+        if (typeof user === 'undefined') {
+            res.json({success: false, message:'Failure. User not found'}); 
+        };
+
+    if (thirdPassword === user.thirdPassword) {
         
         if (token2) {
             // verifies secret and checks exp
             jwt.verify(token2, secret.secretData.tokenSignInSecretGeneral, (err, decoded) => {
                 if (err) {
-                return res.json({ success: false, message: 'Failed to authenticate token.' });
+                    return res.json({ success: false, message: 'Failed to authenticate token.' });
                 } 
-                else {
-                    let token3 = jwt.sign(secret.secretData.signInEntityCommander, secret.secretData.tokenSignInSecretCommander, {
-                        expiresIn: "2 days"
-                      });
-                      res.json({
-                        success: true,
-                        message: 'Third JWT token created and signed!',
-                        token: token3,
-                        fourthRoute: secret.secretData.fourthRoute
+                
+                let token3 = jwt.sign(secret.secretData.signInEntityCommander, secret.secretData.tokenSignInSecretCommander, {
+                    expiresIn: "2 days"
                     });
-                }
-            });
-        
+                res.json({
+                success: true,
+                username: user.name,
+                message: 'Third JWT token created and signed!',
+                token: token3,
+                fourthRoute: secret.secretData.fourthRoute
+                });
+                
+            });        
         }
-
     }
-
     else {
         res.json({success: false, message:'Failure. Third JWT token not created'});
-    }
-
-    
+    } 
 
 })
 
 
 app.post('/sdjogfnwo0aq23aojfnapw', (req,res) => {
-    let fourthAuth = req.get('custom-auth-step4');   
+    let fourthPassword = req.get('custom-auth-step4');   
     let token3 = req.body.token3;
+    let username = req.body.username;
 
-    if (fourthAuth === secret.secretData.fourthPassword) {
+    let user = secret.secretData.users.find( user => user.name === username );
+        if (typeof user === 'undefined') {
+            res.json({success: false, message:'Failure. User not found'}); 
+        };
+
+    if (fourthPassword === user.fourthPassword) {
         
         if (token3) {
             // verifies secret and checks exp
@@ -142,14 +164,14 @@ app.post('/sdjogfnwo0aq23aojfnapw', (req,res) => {
                 if (err) {
                 return res.json({ success: false, message: 'Failed to authenticate token.' });
                 } 
-                else {                    
-                      res.json({
-                        success: true,
-                        message: 'Success! You have accessed the most secret data!',
-                        superSecretData:'Five busy honey bees were resting in the sun. The first one said, "Let us have some fun." The second one said, "Where shall it be?" The third one said, "In the honey tree." The fourth one said, "Let us make some honey sweet." The fifth one said, "With pollen on our feet." The five little busy bees sang their buzzing tune, As they worked in the beehive all that afternoon. Bzzzzzz! Bzzzzzz! Bzzzzzz! Bzzzzzz! Bzzzzzz!'
-                        
-                    });
-                }
+                                    
+                res.json({
+                    success: true,
+                    message: 'Success! You have accessed the most secret data!',
+                    superSecretData:'Five busy honey bees were resting in the sun. The first one said, "Let us have some fun." The second one said, "Where shall it be?" The third one said, "In the honey tree." The fourth one said, "Let us make some honey sweet." The fifth one said, "With pollen on our feet." The five little busy bees sang their buzzing tune, As they worked in the beehive all that afternoon. Bzzzzzz! Bzzzzzz! Bzzzzzz! Bzzzzzz! Bzzzzzz!'
+                    
+                });
+                
             });
         
         }
